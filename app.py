@@ -1,16 +1,24 @@
-from flask import Flask, redirect, url_for, render_template
+from flask import Flask, redirect, url_for, render_template, request
+from bs4 import BeautifulSoup
 import utilities
-
 
 app = Flask(__name__)
 
-@app.route("/")
+@app.route("/", method = ['GET', 'POST'])
 def home(): #home page
+    if request.method == 'POST':
+        ingred1 = request.form.get('ingred1')
+        provIng1 = "https://www.provigo.ca/search?search-bar="+ingred1
+
+        ingred2 = request.form.get('ingred2')
+        provIng2 = "https://www.provigo.ca/search?search-bar="+ingred2
+
+
     return render_template('index.html')
 
-@app.route("/recipe")
-def recipe():
-    return "the recipe lol"
+# @app.route("/ingreds", method = ['GET', 'POST'])
+# def ingreds():
+#     return render_template('ingredients.html')
 
 if __name__ == "__main__":
     app.run()

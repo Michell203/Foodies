@@ -15,5 +15,12 @@
     </head>
     <body>
         <h1>Hi! Welcome to foodinmymouth</h1>
+        <form action="{{ url_for("home")}}" method="post">
+            <label for="ingred1">Ingred1:</label><br>
+            <input type="text" id="ingred1" name="ingred1"><br>
+
+            <label for="ingred2">Ingred2:</label><br>
+            <input type="text" id="ingred2" name="ingred2">
+        </form> 
     </body>
 </html>
