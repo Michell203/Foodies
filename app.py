@@ -20,9 +20,9 @@ def home(): #home page
         print(ingPirce)
 
         metroIngred = "https://www.metro.ca/en/search?filter="+str(ingred1)
-        metro_webpage = requests.get(ingIngred, headers=HEADERS)
-        metr_soup = BeautifulSoup(metro_webpage.content, "lxml")
-        metroPirce = metr_soup.find_all('span')[0]
+        metro_webpage = requests.get(metroIngred, headers=HEADERS)
+        metro_soup = BeautifulSoup(metro_webpage.content, "lxml")
+        metroPirce = metro_soup.find_all('div',class_="pricing__secondary-price")[0]
         print(metroPirce)
 
         
