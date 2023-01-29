@@ -55,14 +55,16 @@ def parser(ingredients):
 #     return price    
 def extract_price(someString):
     price = ""
-    tick = False
-    for i in someString:
-        if i == '$':
-            tick = True
-        if (tick):
-            price += i
-        if i == ' ':
-            tick = False
-    return price  
+    for i in range(len(someString)):
+        if someString[i] == '$':
+            j=i
+            while j <= len(someString)-1:
+                price += someString[j]
+                j += 1
+                if someString[j] in ["g","l"]:
+                    price += someString[j]
+                    return price
+
+    return price
 
 
