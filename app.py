@@ -7,60 +7,52 @@ app = Flask(__name__)
 
 @app.route("/", methods=['GET', 'POST'])
 def home(): #home page
-    # if request.method == 'POST':
-    #     HEADERS = ({'User-Agent':
-    #         'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.157 Safari/537.36',
-    #         'Accept-Language': 'en-US, en;q=0.5'})
+    if request.method == 'POST':
+        HEADERS = ({'User-Agent':
+            'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.157 Safari/537.36',
+            'Accept-Language': 'en-US, en;q=0.5'})
 
-            
-    #     URL = "https://www.iga.net/en/online_grocery/browse/Meat/Fresh%20Chicken%20&%20Fowl/Chicken%20&%20Fowl%20Prepared%20Vendor"
-    #     webpage = requests.get(URL, headers=HEADERS)
-    #     soup = BeautifulSoup(webpage.content, "lxml")
-    #     # Outer Tag Object
+        ingred1 = request.form.get('ingred1')
+        ingIngred = "https://www.iga.net/en/search?t={D9CE4CBE-C8C3-4203-A58B-7CF7B830880E}&k="+str(ingred1)
+        ing_webpage = requests.get(ingIngred, headers=HEADERS)
+        ing_soup = BeautifulSoup(ing_webpage.content, "lxml")
+        ingPirce = ing_soup.find_all('div', class_="text--small")[0]
+        print(ingPirce)
 
-    #     # title = soup.find("span", attrs={"id":'productTitle'})
-    #     print(soup.find_all('div', class_="text--small"))
-    #     # Inner NavigableString Object
-    #     # title_value = title.string
-    #     # Title as a string value
-    #     # title_string = title_value.strip()
-    #     # Printing types of values for efficient understanding
-    #     # print(type(title))
-    #     # print(type(title_value))
-    #     # print(type(title_string))
-    #     print()
+        metroIngred = "https://www.metro.ca/en/search?filter="+str(ingred1)
+        metro_webpage = requests.get(ingIngred, headers=HEADERS)
+        metr_soup = BeautifulSoup(metro_webpage.content, "lxml")
+        metroPirce = metr_soup.find_all('span')[0]
+        print(metroPirce)
 
-    #     # Printing Product Title
-    #     # print("Product Title = ", title_string)
-    # return render_template('index.html')
+        
+        #return ingPirce
+    return render_template('index.html')
 
 
     if request.method == 'POST':
-        HEADERS = ({'User-Agent':
-             'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.157 Safari/537.36',
-             'Accept-Language': 'en-US, en;q=0.5'})
-
-        ingred1 = request.form.get('ingred1')
-        ingIng1 = "https://www.iga.net/en/search?t=%7B14A91276-40BA-49D5-940D-3692DE3DC381%7D&k="+str(ingred1)
-        ing = requests.get(ingIng1)
-
-        ingPage = requests.get(ing)
-        ingSoup = BeautifulSoup(ingPage.content, "lxml")
+        # ingred1 = request.form.get('ingred1')
+        provIng1 = "https://www.provigo.ca/search?search-bar=chicken"
+        # provIng1 = "https://www.provigo.ca/search?search-bar="+str(ingred1)
+        # print(provIng1)
+        r1 = requests.get(provIng1)
         # r1T = r1.text
         # print(r1T)
 
         # soup1 = BeautifulSoup(r1.content, 'html.parser')
-        print(ingSoup.find_all('div', class_="text--small")[0])
+        soup1 = BeautifulSoup(r1.content, 'lxml')
+        print(list(soup1)[-1000:])
 
         # price = soup1.find_all("span",class_="price__value")
         # price = soup1.find("span",class_="price__value")
-        # print(price)
+        price = soup1.find("div",class_="ad-unit-link-wrapper")
+        print(price)
 
         # ingred2 = request.form.get('ingred2')
         # provIng2 = "https://www.provigo.ca/search?search-bar="+ingred2
         # r2 = requests.get(provIng2)
         print("in if")
-        return ingSoup
+        return provIng1
         
     print("bruh")
     return render_template('index.html')
