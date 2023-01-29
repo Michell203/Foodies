@@ -52,5 +52,6 @@ def extract_price(someString):
     for i in someString:
         if i.isdigit():
             price += i 
+    return price     
 
-print(extract_price("bruh123"))         
+print(extract_price("Saad123"))    
