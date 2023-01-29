@@ -13,7 +13,7 @@ def parser(ingredients):
 
     for i in ing_list:
 
-        print("For: " + i)
+        print("For " + i +":")
 
         igaIngred = "https://www.iga.net/en/search?t={D9CE4CBE-C8C3-4203-A58B-7CF7B830880E}&k="+str(i)
         ing_webpage = requests.get(igaIngred, headers=HEADERS)
@@ -21,7 +21,7 @@ def parser(ingredients):
         try:
             igaPirce = iga_soup.find_all('div', class_="text--small")[0]
             igaPriceS = str(igaPirce)
-            print("IGA's price is: "+str(igaPriceS))
+            print("IGA's price is: "+extract_price(igaPriceS))
         except IndexError:
             print("")
 
@@ -31,7 +31,7 @@ def parser(ingredients):
         try:
             metroPirce = metro_soup.find_all('div',class_="pricing__secondary-price")[0]
             metroPirceS = str(metroPirce)
-            print("Metro's price is: "+ str(metroPirceS))
+            print("Metro's price is: "+ extract_price(metroPirceS))
 
         except IndexError:
             print("")  
@@ -42,16 +42,27 @@ def parser(ingredients):
         try:
 
             provPirce = prov_soup.find_all('ul',class_="comparison-price-list comparison-price-list--product-tile")[0]
-            provPirce = str(provPirce)
-            print("Provigo's price is: "+str(provPirce))
+            provPirceS = str(provPirce)
+            print("Provigo's price is: "+extract_price(provPirceS))
         except IndexError:
             print("")     
 
+# def extract_price(someString):
+#     price = ""
+#     for i in someString:
+#         if i.isdigit() or i == '.':
+#             price += i 
+#     return price    
 def extract_price(someString):
     price = ""
+    tick = False
     for i in someString:
-        if i.isdigit():
-            price += i 
-    return price     
+        if i == '$':
+            tick = True
+        if (tick):
+            price += i
+        if i == ' ':
+            tick = False
+    return price  
 
-print(extract_price("Saad123"))    
+
