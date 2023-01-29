@@ -10,7 +10,8 @@ app = Flask(__name__)
 def home(): #home page
     if request.method == 'POST':
         ingred1 = request.form.get('ingred1')
-        utilities.parser(ingred1)
+        return utilities.parser(ingred1)
+         
         
     return render_template('index.html')
 

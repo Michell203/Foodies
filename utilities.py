@@ -10,10 +10,12 @@ def parser(ingredients):
             'Accept-Language': 'en-US, en;q=0.5'})
 
     ing_list = ingredients.split()
+    list1 = []
 
     for i in ing_list:
 
         print("For " + i +":")
+        list1.append("For " + i +":")
 
         igaIngred = "https://www.iga.net/en/search?t={D9CE4CBE-C8C3-4203-A58B-7CF7B830880E}&k="+str(i)
         ing_webpage = requests.get(igaIngred, headers=HEADERS)
@@ -22,6 +24,7 @@ def parser(ingredients):
             igaPirce = iga_soup.find_all('div', class_="text--small")[0]
             igaPriceS = str(igaPirce)
             print("IGA's price is: "+extract_price(igaPriceS))
+            list1.append("IGA's price is: "+extract_price(igaPriceS))
         except IndexError:
             print("'error iga")
 
@@ -32,6 +35,7 @@ def parser(ingredients):
             metroPirce = metro_soup.find_all('div',class_="pricing__secondary-price")[0]
             metroPirceS = str(metroPirce)
             print("Metro's price is: "+ extract_price(metroPirceS))
+            list1.append("Metro's price is: "+ extract_price(metroPirceS))
 
         except IndexError:
             print("")  
@@ -44,8 +48,11 @@ def parser(ingredients):
             provPirce = prov_soup.find_all('ul',class_="comparison-price-list comparison-price-list--product-tile")[0]
             provPirceS = str(provPirce)
             print("Provigo's price is: "+extract_price(provPirceS))
+            list1.append("Provigo's price is: "+extract_price(provPirceS))
         except IndexError:
             print("")     
+
+    return list1    
 
 # def extract_price(someString):
 #     price = ""
