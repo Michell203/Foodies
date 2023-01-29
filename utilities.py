@@ -23,7 +23,7 @@ def parser(ingredients):
             igaPriceS = str(igaPirce)
             print("IGA's price is: "+extract_price(igaPriceS))
         except IndexError:
-            print("")
+            print("'error iga")
 
         metroIngred = "https://www.metro.ca/en/search?filter="+str(i)
         metro_webpage = requests.get(metroIngred, headers=HEADERS)
@@ -59,12 +59,12 @@ def extract_price(someString):
         if someString[i] == '$':
             j=i
             while j <= len(someString)-1:
+                if someString[j] in ["","<"]:
+                    #price += someString[j]
+                    return price
                 price += someString[j]
                 j += 1
-                if someString[j] in ["g","l"]:
-                    price += someString[j]
-                    return price
-
+                
     return price
 
 
