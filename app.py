@@ -5,7 +5,7 @@ import utilities
 
 app = Flask(__name__)
 
-@app.route("/", methods=['GET', 'POST'])
+@app.route("/", method=['GET', 'POST'])
 def home(): #home page
     if request.method == 'POST':
         HEADERS = ({'User-Agent':
