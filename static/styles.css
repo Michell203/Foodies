@@ -1,0 +1,11 @@
+.form{
+    font-family: 'Courier New', Courier, monospace;
+    text-align: center;
+
+}
+
+button{
+    padding: 0.5%;
+    margin: 0.5%;
+    background-color: red;
+}
