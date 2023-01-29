@@ -14,13 +14,15 @@
         <!-- <script src="" async defer></script> -->
     </head>
     <body>
-        <h1>Hi! Welcome to foodinmymouth</h1>
-        <form action="{{ url_for("home")}}" method="post">
+        <h1>Hi! Welcome to Foodies</h1>
+        <form action="{{ url_for("home")}}" method="POST">
             <label for="ingred1">Ingred1:</label><br>
             <input type="text" id="ingred1" name="ingred1"><br>
 
-            <label for="ingred2">Ingred2:</label><br>
-            <input type="text" id="ingred2" name="ingred2">
+            <!-- <label for="ingred2">Ingred2:</label><br>
+            <input type="text" id="ingred2" name="ingred2"> -->
+
+            <button type="submit">Enter</button>
         </form> 
     </body>
 </html>
